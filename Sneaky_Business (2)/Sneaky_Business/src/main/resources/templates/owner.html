@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Owners - Sneaky Business</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-gray-900 text-white min-h-screen font-sans">
+
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <h1 class="text-4xl font-bold mb-8 text-indigo-400">💼 Business Owners</h1>
+
+    <div class="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
+      <table class="min-w-full text-sm">
+        <thead>
+          <tr class="text-gray-300 bg-gray-700 border-b border-gray-600">
+            <th class="text-left px-6 py-3">Business Name</th>
+            <th class="text-left px-6 py-3">Owner Name</th>
+            <th class="text-left px-6 py-3">Contact Email</th>
+            <th class="text-left px-6 py-3">Required Investment</th>
+            <th class="text-left px-6 py-3">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
+            <td class="px-6 py-4 font-semibold">Tech Startup X</td>
+            <td class="px-6 py-4">John Doe</td>
+            <td class="px-6 py-4">john@example.com</td>
+            <td class="px-6 py-4">$15,000</td>
+            <td class="px-6 py-4 text-green-400 font-medium">Active</td>
+          </tr>
+          <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
+            <td class="px-6 py-4 font-semibold">Foodies Delight</td>
+            <td class="px-6 py-4">Mary Smith</td>
+            <td class="px-6 py-4">mary@example.com</td>
+            <td class="px-6 py-4">$8,000</td>
+            <td class="px-6 py-4 text-yellow-400 font-medium">Pending</td>
+          </tr>
+          <tr class="hover:bg-gray-700/50 transition">
+            <td class="px-6 py-4 font-semibold">Eco-Friendly Packaging</td>
+            <td class="px-6 py-4">Raj Patel</td>
+            <td class="px-6 py-4">raj@example.com</td>
+            <td class="px-6 py-4">$12,000</td>
+            <td class="px-6 py-4 text-red-400 font-medium">Closed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-6">
+      <a href="dashboard.html" class="text-indigo-400 hover:underline">← Back to Dashboard</a>
+    </div>
+  </div>
 
 </body>
 </html>
