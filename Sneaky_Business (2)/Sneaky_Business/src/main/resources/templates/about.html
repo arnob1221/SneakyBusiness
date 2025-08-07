@@ -6,8 +6,7 @@
   <title>About Us - Sneaky Business</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <script>
-    // Auth check simulation
-    const isLoggedIn = false; // Replace with backend session check later
+    const isLoggedIn = false;
 
     function protectedRoute(e, targetPage) {
       e.preventDefault();
@@ -34,7 +33,7 @@
         <span class="text-2xl font-bold text-indigo-400">Sneaky Business</span>
       </a>
       <nav class="hidden md:flex space-x-6 text-gray-300">
-        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="business.html" class="hover:text-white">Home</a>
         <a href="#" onclick="protectedRoute(event, 'dashboard.html')" class="hover:text-white">Dashboard</a>
         <a href="#" onclick="protectedRoute(event, 'investors.html')" class="hover:text-white">Investors</a>
         <a href="#" onclick="protectedRoute(event, 'owners.html')" class="hover:text-white">Owners</a>
@@ -52,7 +51,7 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden hidden px-6 pb-6 space-y-3 text-gray-300">
-      <a href="index.html" class="block hover:text-white">Home</a>
+      <a href="business.html" class="block hover:text-white">Home</a>
       <a href="#" onclick="protectedRoute(event, 'dashboard.html')" class="block hover:text-white">Dashboard</a>
       <a href="#" onclick="protectedRoute(event, 'investors.html')" class="block hover:text-white">Investors</a>
       <a href="#" onclick="protectedRoute(event, 'owners.html')" class="block hover:text-white">Owners</a>
@@ -94,37 +93,40 @@
   </section>
 
   <!-- Team -->
-  <section class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-4xl font-bold text-indigo-400 mb-12 text-center">Meet Our Team</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-      <!-- Each team card -->
-      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
-        <img src="../images/zayed.jpg" alt="Team 1" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
-        <h3 class="text-xl font-semibold mb-1">Zayed Mahin</h3>
-        <p class="text-gray-400">Founder & CEO</p>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
-        <img src="../images/arnob.jpg" alt="Team 1" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
-        <h3 class="text-xl font-semibold mb-1">Arnob Debanth</h3>
-        <p class="text-gray-400">Founder & CEO</p>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
-        <img src="../images/with laptop.jpg" alt="Team 2" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
-        <h3 class="text-xl font-semibold mb-1">Imran Nazir</h3>
-        <p class="text-gray-400">CTO</p>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
-        <img src="../images/abir.jpg" alt="Team 3" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
-        <h3 class="text-xl font-semibold mb-1">Ahteshamul Sakib Abir</h3>
-        <p class="text-gray-400">Marketing Head</p>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
-        <img src="../images/kawser.jpeg" alt="Team 4" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
-        <h3 class="text-xl font-semibold mb-1">Kawser Mahbub Shihab </h3>
-        <p class="text-gray-400">Product Manager</p>
-      </div>
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-4xl font-bold text-indigo-400 mb-12 text-center">Meet Our Team</h2>
+
+
+  <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition max-w-xs mx-auto mb-12">
+    <img src="../images/zayed.jpg" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+    <h3 class="text-xl font-semibold mb-1">Zayed Mahin</h3>
+    <p class="text-gray-400">Founder & CEO</p>
+  </div>
+
+  
+  <div class="grid grid-cols-4 gap-10 max-w-5xl mx-auto">
+    <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+      <img src="../images/arnob.jpg" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+      <h3 class="text-xl font-semibold mb-1">Arnob Debanth</h3>
+      <p class="text-gray-400">Founder & CEO</p>
     </div>
-  </section>
+    <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+      <img src="../images/with laptop.jpg" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+      <h3 class="text-xl font-semibold mb-1">Imran Nazir</h3>
+      <p class="text-gray-400">CTO</p>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+      <img src="../images/abir.jpg" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+      <h3 class="text-xl font-semibold mb-1">Ahteshamul Sakib Abir</h3>
+      <p class="text-gray-400">Marketing Head</p>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+      <img src="../images/kawser.jpeg" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+      <h3 class="text-xl font-semibold mb-1">Kawser Mahbub Shihab</h3>
+      <p class="text-gray-400">Product Manager</p>
+    </div>
+  </div>
+</section>
 
   <!-- FAQ -->
   <section class="bg-gray-800 py-12">
@@ -151,9 +153,47 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="text-center text-gray-500 text-sm py-6">
-    &copy; 2025 Sneaky Business. All rights reserved.
+  <!-- ✅ Updated Footer -->
+  <footer class="bg-gray-900 py-8 text-gray-400">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+      <div>
+        <img src="../images/e.jpg" alt="Logo" class="mx-auto md:mx-0 w-12 h-12 rounded-full mb-3" />
+        <p class="text-indigo-400 font-bold text-lg">Sneaky Business</p>
+        <p class="text-sm mt-2">Empowering investments, empowering people.</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">Contact</p>
+        <p>Email: support@sneakybusiness.com</p>
+        <p>Phone: +880 1234 567890</p>
+        <p>Address: 12/B, Tech Park, Dhaka, Bangladesh</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">Follow Us</p>
+        <div class="flex justify-center md:justify-start space-x-4 mt-2">
+          <a href="#" class="hover:text-indigo-400" title="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 4.97 3.66 9.09 8.44 9.88v-6.99H8.1v-2.89h2.34V9.41c0-2.3 1.37-3.57 3.47-3.57.99 0 2.02.18 2.02.18v2.22h-1.14c-1.12 0-1.47.7-1.47 1.42v1.7h2.5l-.4 2.89h-2.1v6.99C18.34 21.16 22 17.04 22 12.07z"/>
+            </svg>
+          </a>
+          <a href="#" class="hover:text-indigo-400" title="Twitter">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37c-.84.5-1.77.85-2.76 1.05a4.28 4.28 0 00-7.3 3.9 12.14 12.14 0 01-8.8-4.47 4.28 4.28 0 001.33 5.7A4.25 4.25 0 012 9.6v.05a4.28 4.28 0 003.44 4.2 4.29 4.29 0 01-1.92.07 4.28 4.28 0 004 2.97A8.59 8.59 0 012 19.54a12.1 12.1 0 006.56 1.92c7.88 0 12.2-6.53 12.2-12.2l-.01-.56A8.72 8.72 0 0024 4.56a8.5 8.5 0 01-2.54.7z"/>
+            </svg>
+          </a>
+          <a href="#" class="hover:text-indigo-400" title="LinkedIn">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M4.98 3.5C3.33 3.5 2 4.82 2 6.47s1.33 2.97 2.98 2.97 2.98-1.33 2.98-2.97S6.63 3.5 4.98 3.5zM2.4 21h5.16V9.57H2.4V21zm7.7 0h5.16v-6.28c0-3.37-4.03-3.12-4.03 0V21H20.4V12.9c0-5.76-6.41-5.54-7.89-2.71v-1.1H10.1V21z"/>
+            </svg>
+          </a>
+          <a href="#" class="hover:text-indigo-400" title="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.5a3 3 0 100 6 3 3 0 000-6zm5.25-.75a1 1 0 110 2 1 1 0 010-2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-gray-500 mt-6 text-sm">&copy; 2025 Sneaky Business. All rights reserved.</p>
   </footer>
 
 </body>

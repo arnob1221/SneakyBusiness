@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sneaky Business - Register</title>
+  <title>Sneaky Business - Register with OTP</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 min-h-screen flex items-center justify-center font-sans">
@@ -11,7 +11,7 @@
   <div class="bg-white/10 backdrop-blur-md shadow-2xl rounded-2xl p-8 sm:p-12 w-full max-w-md text-white">
     <h2 class="text-3xl font-bold text-center mb-6">📝 Register Account</h2>
 
-    <form action="login.html" method="get" class="space-y-6">
+    <form id="registerForm" class="space-y-6" onsubmit="return false;">
       <!-- Role -->
       <div>
         <label for="role" class="block text-sm font-semibold text-gray-200 mb-1">Register as</label>
@@ -27,14 +27,21 @@
       <div>
         <label for="name" class="block text-sm font-semibold text-gray-200 mb-1">Full Name</label>
         <input type="text" id="name" name="name" required
-               class="w-full px-4 py-2 rounded-md bg-white/20 text-white placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400"/>
+               class="w-full px-4 py-2 rounded-md bg-white/20 text-black  placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400"/>
       </div>
 
       <!-- Email -->
       <div>
         <label for="email" class="block text-sm font-semibold text-gray-200 mb-1">Email address</label>
         <input type="email" id="email" name="email" required
-               class="w-full px-4 py-2 rounded-md bg-white/20 text-white placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400"/>
+               class="w-full px-4 py-2 rounded-md bg-white/20 text-black placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400"/>
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label for="phone" class="block text-sm font-semibold text-gray-200 mb-1">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+880 1234 567890"
+               class="w-full px-4 py-2 rounded-md bg-white/20 text-black placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400"/>
       </div>
 
       <!-- Password -->
@@ -57,9 +64,28 @@
         <label for="showPassword">Show Passwords</label>
       </div>
 
-      <!-- Submit -->
-      <button type="submit" 
+      <!-- OTP Section -->
+      <div id="otpSection" class="hidden space-y-4">
+        <div>
+          <label for="otpInput" class="block text-sm font-semibold text-gray-200 mb-1">Enter OTP</label>
+          <input type="text" id="otpInput" maxlength="6" placeholder="6-digit OTP"
+                 class="w-full px-4 py-2 rounded-md bg-white/20 text-black placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400" />
+        </div>
+        <button id="verifyOtpBtn" type="button" 
+                class="w-full py-2 px-4 bg-green-600 hover:bg-green-700 transition-colors rounded-lg font-semibold text-white shadow-lg">
+          Verify OTP
+        </button>
+      </div>
+
+      <!-- Send OTP Button -->
+      <button id="sendOtpBtn" type="button"
               class="w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 transition-colors rounded-lg font-semibold text-white shadow-lg">
+        Send OTP
+      </button>
+
+      <!-- Submit -->
+      <button id="submitBtn" type="submit" disabled
+              class="w-full py-2 px-4 bg-indigo-600 cursor-not-allowed rounded-lg font-semibold text-white shadow-lg opacity-50">
         Create Account
       </button>
     </form>
@@ -70,7 +96,6 @@
     </p>
   </div>
 
-  <!-- JavaScript for Show/Hide Password -->
   <script>
     function togglePassword() {
       const pass1 = document.getElementById('password');
@@ -79,6 +104,87 @@
       pass1.type = type;
       pass2.type = type;
     }
+
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+    const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+    const otpSection = document.getElementById('otpSection');
+    const submitBtn = document.getElementById('submitBtn');
+    const otpInput = document.getElementById('otpInput');
+
+    let generatedOtp = null;
+
+    function generateOtp() {
+      // Generate a random 6-digit OTP
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    // Validate email or phone before sending OTP
+    function canSendOtp() {
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      // Simple validation: either email or phone must be filled
+      if (email === "" && phone === "") {
+        alert("Please enter your Email or Phone Number before sending OTP.");
+        return false;
+      }
+      return true;
+    }
+
+    sendOtpBtn.addEventListener('click', () => {
+      if(!canSendOtp()) return;
+
+      // Generate and "send" OTP (simulate)
+      generatedOtp = generateOtp();
+
+      alert(`OTP sent: ${generatedOtp} \n(Note: This is a simulation. In real app, OTP is sent via email or SMS.)`);
+
+      // Show OTP input section & enable verify button
+      otpSection.classList.remove('hidden');
+      sendOtpBtn.disabled = true;
+      sendOtpBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      verifyOtpBtn.disabled = false;
+    });
+
+    verifyOtpBtn.addEventListener('click', () => {
+      const userOtp = otpInput.value.trim();
+
+      if(userOtp === "") {
+        alert("Please enter the OTP.");
+        return;
+      }
+
+      if(userOtp === generatedOtp) {
+        alert("OTP verified successfully! You can now create your account.");
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+        // Hide OTP section after successful verification
+        otpSection.classList.add('hidden');
+      } else {
+        alert("Incorrect OTP. Please try again.");
+      }
+    });
+
+    // Prevent form submit if password and confirm password don't match
+    document.getElementById('registerForm').addEventListener('submit', () => {
+      const pw = document.getElementById('password').value;
+      const cpw = document.getElementById('confirm').value;
+      if(pw !== cpw) {
+        alert("Passwords do not match.");
+        return false;
+      }
+      // If OTP not verified yet, block submission
+      if(submitBtn.disabled) {
+        alert("Please verify OTP before submitting.");
+        return false;
+      }
+      alert("Form submitted! (You can connect backend here)");
+      // Redirect or other actions can be done here
+      // For now just prevent reload
+      return false;
+    });
   </script>
 
 </body>

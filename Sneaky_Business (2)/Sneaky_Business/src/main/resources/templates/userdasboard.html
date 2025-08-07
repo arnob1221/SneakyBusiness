@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Dashboard - Sneaky Business</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+  <div class="flex min-h-screen flex-col md:flex-row">
+    <!-- Sidebar -->
+    <aside class="w-full md:w-64 bg-purple-800 text-white flex flex-col p-6 space-y-4">
+      <h2 class="text-2xl font-bold mb-4 flex items-center space-x-4">
+        <img src="../images/e.jpg" alt="logo" class="mb-1 w-6 h-6 rounded-md" />
+        <span>Sneaky Business</span>
+      </h2>
+      <nav class="flex flex-col flex-1 space-y-2 overflow-auto">
+        <a href="userdasboard.html" class="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded">
+          <span>🏠</span><span>Dashboard</span>
+        </a>
+        <a href="userprofile.html" class="flex items-center space-x-2 hover:bg-purple-700 p-2 rounded">
+          <span>👤</span><span>Profile</span>
+        </a>
+      </nav>
+      <a href="userlogin.html" class="flex items-center space-x-2 text-red-300 hover:text-white p-2 rounded">
+        <span>🚪</span><span>Logout</span>
+      </a>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 p-6 md:p-8 bg-gray-50 overflow-auto">
+      <header class="flex justify-between items-center mb-6 flex-wrap">
+        <h1 class="text-3xl font-bold text-gray-800">User Dashboard</h1>
+        <button id="logoutBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded mt-2 md:mt-0">
+          Logout
+        </button>
+      </header>
+
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white p-6 rounded-xl shadow text-center">
+          <h2 class="text-xl font-semibold text-gray-700">Total Investment</h2>
+          <p id="totalInvestment" class="text-2xl text-purple-600 font-bold mt-2">$0.00</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow text-center">
+          <h2 class="text-xl font-semibold text-gray-700">Returns</h2>
+          <p id="totalReturns" class="text-2xl text-green-500 font-bold mt-2">$0.00</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow text-center">
+          <h2 class="text-xl font-semibold text-gray-700">Active Projects</h2>
+          <p id="activeProjects" class="text-2xl text-blue-500 font-bold mt-2">0</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Dummy data for user summary
+    const investments = [
+      { amount: 1200, returns: 120, status: 'active' },
+      { amount: 500, returns: 30, status: 'closed' },
+      { amount: 300, returns: 45, status: 'active' },
+    ];
+
+    const totalInvestment = investments.reduce((sum, i) => sum + i.amount, 0);
+    const totalReturns = investments.reduce((sum, i) => sum + i.returns, 0);
+    const activeProjects = investments.filter(i => i.status === 'active').length;
+
+    document.getElementById('totalInvestment').textContent = `$${totalInvestment.toFixed(2)}`;
+    document.getElementById('totalReturns').textContent = `$${totalReturns.toFixed(2)}`;
+    document.getElementById('activeProjects').textContent = activeProjects;
+  </script>
+</body>
+</html>

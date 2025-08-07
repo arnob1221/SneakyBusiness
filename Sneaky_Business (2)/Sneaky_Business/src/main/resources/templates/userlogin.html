@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sneaky Business - Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 min-h-screen flex items-center justify-center font-sans">
+
+  <div class="bg-white/10 backdrop-blur-md shadow-2xl rounded-2xl p-8 sm:p-12 w-full max-w-md text-white">
+
+    <h2 class="text-3xl font-bold mb-6 flex items-start justify-center space-x-4">
+      <img src="../images/a.jpg" alt="logo" class="w-8 h-8 mt-2 rounded-lg" />
+      <span class="mt-1">Sneaky Business</span>
+    </h2>
+
+    <form action="userdasboard.html" method="get" class="space-y-6">
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-semibold text-gray-200 mb-1">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="Enter your email"
+          class="w-full px-4 py-2 rounded-md bg-white/20 text-white placeholder-gray-300 border border-white/30
+                 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+        />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-semibold text-gray-200 mb-1">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 rounded-md bg-gray-100 text-black placeholder-gray-300 border border-gray-400
+                 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+        />
+        <!-- Show Password Checkbox -->
+        <label class="flex items-center mt-2 text-sm text-gray-200 space-x-2 cursor-pointer">
+          <input type="checkbox" onclick="togglePassword()" class="accent-purple-500" />
+          <span>Show Password</span>
+        </label>
+      </div>
+
+      <!-- Remember & Forgot -->
+      <div class="flex items-center justify-between text-sm">
+        <label class="flex items-center space-x-2 cursor-pointer">
+          <input type="checkbox" class="accent-purple-500" />
+          <span>Remember me</span>
+        </label>
+        <a href="forgot-password.html" class="text-purple-300 hover:underline">Forgot password?</a>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 transition-colors rounded-lg font-semibold text-white shadow-lg"
+      >
+        Login
+      </button>
+    </form>
+
+    <p class="text-sm text-center mt-6">
+      Don't have an account?
+      <a href="register.html" class="text-purple-300 hover:underline">Register</a>
+    </p>
+  </div>
+
+  <!-- JavaScript for Show Password toggle -->
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+  </script>
+
+</body>
+</html>
