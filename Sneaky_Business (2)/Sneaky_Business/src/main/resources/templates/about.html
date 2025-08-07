@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us - Sneaky Business</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script>
+    // Auth check simulation
+    const isLoggedIn = false; // Replace with backend session check later
+
+    function protectedRoute(e, targetPage) {
+      e.preventDefault();
+      if (!isLoggedIn) {
+        alert("Please login first to access this page.");
+        window.location.href = "login.html";
+      } else {
+        window.location.href = targetPage;
+      }
+    }
+
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-gray-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-3">
+        <img src="../images/e.jpg" alt="Logo" class="w-10 h-10 rounded-full" />
+        <span class="text-2xl font-bold text-indigo-400">Sneaky Business</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-gray-300">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="#" onclick="protectedRoute(event, 'dashboard.html')" class="hover:text-white">Dashboard</a>
+        <a href="#" onclick="protectedRoute(event, 'investors.html')" class="hover:text-white">Investors</a>
+        <a href="#" onclick="protectedRoute(event, 'owners.html')" class="hover:text-white">Owners</a>
+        <a href="about.html" class="font-semibold text-indigo-400">About</a>
+        <a href="login.html" class="hover:text-white">Login</a>
+        <a href="register.html" class="hover:text-white">Register</a>
+      </nav>
+      <button class="md:hidden focus:outline-none" onclick="toggleMenu()">
+        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-6 pb-6 space-y-3 text-gray-300">
+      <a href="index.html" class="block hover:text-white">Home</a>
+      <a href="#" onclick="protectedRoute(event, 'dashboard.html')" class="block hover:text-white">Dashboard</a>
+      <a href="#" onclick="protectedRoute(event, 'investors.html')" class="block hover:text-white">Investors</a>
+      <a href="#" onclick="protectedRoute(event, 'owners.html')" class="block hover:text-white">Owners</a>
+      <a href="about.html" class="block font-semibold text-indigo-400">About</a>
+      <a href="login.html" class="block hover:text-white">Login</a>
+      <a href="register.html" class="block hover:text-white">Register</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-5xl mx-auto px-6 py-16 text-center">
+    <h1 class="text-5xl font-extrabold text-indigo-400 mb-6">About Sneaky Business</h1>
+    <p class="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
+      Sneaky Business is a smart investment tracking platform designed to empower entrepreneurs and investors by providing real-time data, insights, and seamless collaboration.
+    </p>
+  </section>
+
+  <!-- Mission, Vision, Values -->
+  <section class="bg-gray-800 py-12">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+      <div>
+        <h2 class="text-indigo-400 text-3xl font-semibold mb-4">Our Mission</h2>
+        <p class="text-gray-300">To simplify investment tracking and foster trust between business owners and investors.</p>
+      </div>
+      <div>
+        <h2 class="text-indigo-400 text-3xl font-semibold mb-4">Our Vision</h2>
+        <p class="text-gray-300">To become the leading platform for transparent and efficient investment management worldwide.</p>
+      </div>
+      <div>
+        <h2 class="text-indigo-400 text-3xl font-semibold mb-4">Our Values</h2>
+        <ul class="text-gray-300 list-disc list-inside space-y-2 text-left sm:text-center">
+          <li>Transparency</li>
+          <li>Security</li>
+          <li>Innovation</li>
+          <li>Customer-Centricity</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-bold text-indigo-400 mb-12 text-center">Meet Our Team</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <!-- Each team card -->
+      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+        <img src="../images/zayed.jpg" alt="Team 1" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+        <h3 class="text-xl font-semibold mb-1">Zayed Mahin</h3>
+        <p class="text-gray-400">Founder & CEO</p>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+        <img src="../images/arnob.jpg" alt="Team 1" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+        <h3 class="text-xl font-semibold mb-1">Arnob Debanth</h3>
+        <p class="text-gray-400">Founder & CEO</p>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+        <img src="../images/with laptop.jpg" alt="Team 2" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+        <h3 class="text-xl font-semibold mb-1">Imran Nazir</h3>
+        <p class="text-gray-400">CTO</p>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+        <img src="../images/abir.jpg" alt="Team 3" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+        <h3 class="text-xl font-semibold mb-1">Ahteshamul Sakib Abir</h3>
+        <p class="text-gray-400">Marketing Head</p>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg hover:shadow-indigo-500/50 transition">
+        <img src="../images/kawser.jpeg" alt="Team 4" class="mx-auto rounded-full w-28 h-28 mb-4 object-cover" />
+        <h3 class="text-xl font-semibold mb-1">Kawser Mahbub Shihab </h3>
+        <p class="text-gray-400">Product Manager</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-800 py-12">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-indigo-400 mb-8 text-center">FAQs</h2>
+      <div class="space-y-4 text-gray-300">
+        <details class="bg-gray-700 rounded-md p-4 cursor-pointer">
+          <summary class="font-semibold text-lg">What is Sneaky Business?</summary>
+          <p class="mt-2">An investment platform for both entrepreneurs and investors.</p>
+        </details>
+        <details class="bg-gray-700 rounded-md p-4 cursor-pointer">
+          <summary class="font-semibold text-lg">Is my data safe?</summary>
+          <p class="mt-2">Yes, we implement high-standard security protocols.</p>
+        </details>
+        <details class="bg-gray-700 rounded-md p-4 cursor-pointer">
+          <summary class="font-semibold text-lg">Can I play dual role?</summary>
+          <p class="mt-2">Yes, user can register both as investor and owner.</p>
+        </details>
+        <details class="bg-gray-700 rounded-md p-4 cursor-pointer">
+          <summary class="font-semibold text-lg">Need help?</summary>
+          <p class="mt-2">Contact us at support@sneakybusiness.com.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 text-sm py-6">
+    &copy; 2025 Sneaky Business. All rights reserved.
+  </footer>
+
+</body>
+</html>

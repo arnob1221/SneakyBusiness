@@ -2,17 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investments - Sneaky Business</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    /* Responsive switch: hide table on small, show cards */
+    @media (max-width: 768px) {
+      table {
+        display: none;
+      }
+      .card-container {
+        display: block;
+      }
+    }
+    @media (min-width: 769px) {
+      .card-container {
+        display: none;
+      }
+      table {
+        display: table;
+      }
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white font-sans min-h-screen">
 
   <div class="max-w-6xl mx-auto px-6 py-10">
-    <h1 class="text-4xl font-semibold mb-8 text-indigo-300">📈 Investments</h1>
+    <h1 class="text-4xl font-semibold mb-8 text-indigo-300 flex items-center space-x-3">
+      <span>📈</span><span>Investments</span>
+    </h1>
 
+    <!-- Table container -->
     <div class="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
-      <table class="w-full text-sm">
+      <table class="w-full text-sm" id="investmentTable">
         <thead>
           <tr class="text-gray-300 bg-gray-700 border-b border-gray-600">
             <th class="text-left px-6 py-3">Project</th>
@@ -22,32 +44,98 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
-            <td class="px-6 py-4">E-commerce App</td>
-            <td class="px-6 py-4">$10,000</td>
-            <td class="px-6 py-4 text-green-400 font-medium">Active</td>
-            <td class="px-6 py-4">Aug 1, 2025</td>
-          </tr>
-          <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
-            <td class="px-6 py-4">Logistics Platform</td>
-            <td class="px-6 py-4">$7,500</td>
-            <td class="px-6 py-4 text-yellow-300 font-medium">Pending</td>
-            <td class="px-6 py-4">Jul 24, 2025</td>
-          </tr>
-          <tr class="hover:bg-gray-700/50 transition">
-            <td class="px-6 py-4">Food Delivery Startup</td>
-            <td class="px-6 py-4">$7,500</td>
-            <td class="px-6 py-4 text-red-400 font-medium">Closed</td>
-            <td class="px-6 py-4">Jul 18, 2025</td>
-          </tr>
+          <!-- Rows inserted by JS -->
         </tbody>
       </table>
+    </div>
+
+    <!-- Card container for mobile -->
+    <div class="card-container space-y-6 mt-6" id="investmentCards">
+      <!-- Cards inserted by JS -->
     </div>
 
     <div class="mt-6">
       <a href="dashboard.html" class="text-indigo-300 hover:text-white transition underline">← Back to Dashboard</a>
     </div>
   </div>
+
+  <script>
+    // Sample data - backend will send this JSON
+    const investments = [
+      {
+        project: "E-commerce App",
+        amount: 10000,
+        status: "Active",
+        date: "Aug 1, 2025"
+      },
+      {
+        project: "Logistics Platform",
+        amount: 7500,
+        status: "Pending",
+        date: "Jul 24, 2025"
+      },
+      {
+        project: "Food Delivery Startup",
+        amount: 7500,
+        status: "Closed",
+        date: "Jul 18, 2025"
+      }
+    ];
+
+    // Status color map
+    const statusColors = {
+      Active: "text-green-400",
+      Pending: "text-yellow-300",
+      Closed: "text-red-400"
+    };
+
+    // Format amount with $ and commas
+    function formatAmount(num) {
+      return "$" + num.toLocaleString();
+    }
+
+    // Render table rows dynamically
+    function renderTable() {
+      const tbody = document.querySelector("#investmentTable tbody");
+      tbody.innerHTML = "";
+      investments.forEach(inv => {
+        const tr = document.createElement("tr");
+        tr.className = "border-b border-gray-700 hover:bg-gray-700/50 transition";
+
+        tr.innerHTML = `
+          <td class="px-6 py-4">${inv.project}</td>
+          <td class="px-6 py-4 font-semibold">${formatAmount(inv.amount)}</td>
+          <td class="px-6 py-4 ${statusColors[inv.status] || "text-gray-300"} font-medium">${inv.status}</td>
+          <td class="px-6 py-4">${inv.date}</td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Render mobile cards dynamically
+    function renderCards() {
+      const container = document.getElementById("investmentCards");
+      container.innerHTML = "";
+      investments.forEach(inv => {
+        const card = document.createElement("div");
+        card.className = "bg-gray-800 p-4 rounded-lg shadow-lg";
+
+        card.innerHTML = `
+          <p><strong>Project:</strong> ${inv.project}</p>
+          <p><strong>Amount:</strong> <span class="font-semibold">${formatAmount(inv.amount)}</span></p>
+          <p><strong>Status:</strong> <span class="${statusColors[inv.status] || "text-gray-300"} font-medium">${inv.status}</span></p>
+          <p><strong>Date:</strong> ${inv.date}</p>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderTable();
+    renderCards();
+  </script>
 
 </body>
 </html>

@@ -5,50 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Business Owners - Sneaky Business</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    /* Responsive: Hide table on small screens, show cards */
+    @media (max-width: 768px) {
+      table {
+        display: none;
+      }
+      .card-container {
+        display: block;
+      }
+    }
+    /* Show table on bigger screens, hide cards */
+    @media (min-width: 769px) {
+      .card-container {
+        display: none;
+      }
+      table {
+        display: table;
+      }
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white min-h-screen font-sans">
 
-  <div class="max-w-6xl mx-auto px-6 py-10">
-      <h1 class="flex items-center space-x-4 text-4xl font-bold mb-8 text-indigo-400">
-      <img src="../images/c.jpg" alt="logo" class=" mt-1 rounded-md h-8 w-8" />
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h1 class="flex items-center space-x-4 text-4xl font-bold mb-8 text-indigo-400">
+      <img src="../images/c.jpg" alt="logo" class="mt-1 rounded-md h-8 w-8" />
       <span>Business Owners</span>
     </h1>
 
+    <!-- Table for desktop -->
     <div class="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
-      <table class="min-w-full text-sm">
+      <table class="min-w-full text-sm table-auto">
         <thead>
           <tr class="text-gray-300 bg-gray-700 border-b border-gray-600">
-            <th class="text-left px-6 py-3">Business Name</th>
-            <th class="text-left px-6 py-3">Owner Name</th>
-            <th class="text-left px-6 py-3">Contact Email</th>
-            <th class="text-left px-6 py-3">Required Investment</th>
-            <th class="text-left px-6 py-3">Status</th>
+            <th class="text-left px-6 py-3 whitespace-nowrap">Business Name</th>
+            <th class="text-left px-6 py-3 whitespace-nowrap">Owner Name</th>
+            <th class="text-left px-6 py-3 whitespace-nowrap">Contact Email</th>
+            <th class="text-left px-6 py-3 whitespace-nowrap">Required Investment</th>
+            <th class="text-left px-6 py-3 whitespace-nowrap">Status</th>
           </tr>
         </thead>
         <tbody>
           <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
-            <td class="px-6 py-4 font-semibold">Tech Startup X</td>
-            <td class="px-6 py-4">John Doe</td>
-            <td class="px-6 py-4">john@example.com</td>
-            <td class="px-6 py-4">$15,000</td>
-            <td class="px-6 py-4 text-green-400 font-medium">Active</td>
+            <td class="px-6 py-4 font-semibold whitespace-nowrap">Tech Startup X</td>
+            <td class="px-6 py-4 whitespace-nowrap">Samiul</td>
+            <td class="px-6 py-4 whitespace-nowrap">samiul@gmail.com</td>
+            <td class="px-6 py-4 whitespace-nowrap">$15,000</td>
+            <td class="px-6 py-4 text-green-400 font-medium whitespace-nowrap">Active</td>
           </tr>
           <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition">
-            <td class="px-6 py-4 font-semibold">Foodies Delight</td>
-            <td class="px-6 py-4">Mary Smith</td>
-            <td class="px-6 py-4">mary@example.com</td>
-            <td class="px-6 py-4">$8,000</td>
-            <td class="px-6 py-4 text-yellow-400 font-medium">Pending</td>
+            <td class="px-6 py-4 font-semibold whitespace-nowrap">Foodies Delight</td>
+            <td class="px-6 py-4 whitespace-nowrap">Sadik Hasan</td>
+            <td class="px-6 py-4 whitespace-nowrap">sadikhasan@gmail.com</td>
+            <td class="px-6 py-4 whitespace-nowrap">$8,000</td>
+            <td class="px-6 py-4 text-yellow-400 font-medium whitespace-nowrap">Pending</td>
           </tr>
           <tr class="hover:bg-gray-700/50 transition">
-            <td class="px-6 py-4 font-semibold">Eco-Friendly Packaging</td>
-            <td class="px-6 py-4">Raj Patel</td>
-            <td class="px-6 py-4">raj@example.com</td>
-            <td class="px-6 py-4">$12,000</td>
-            <td class="px-6 py-4 text-red-400 font-medium">Closed</td>
+            <td class="px-6 py-4 font-semibold whitespace-nowrap">Eco-Friendly Packaging</td>
+            <td class="px-6 py-4 whitespace-nowrap">Rayhan</td>
+            <td class="px-6 py-4 whitespace-nowrap">rayhan@gmail.com</td>
+            <td class="px-6 py-4 whitespace-nowrap">$12,000</td>
+            <td class="px-6 py-4 text-red-400 font-medium whitespace-nowrap">Closed</td>
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Cards for mobile -->
+    <div class="card-container space-y-6 mt-6">
+      <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <p><strong>Business Name:</strong> Tech Startup X</p>
+        <p><strong>Owner Name:</strong> Samiul</p>
+        <p><strong>Contact Email:</strong> samiul@gmail.com</p>
+        <p><strong>Required Investment:</strong> $15,000</p>
+        <p><strong>Status:</strong> <span class="text-green-400 font-medium">Active</span></p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <p><strong>Business Name:</strong> Foodies Delight</p>
+        <p><strong>Owner Name:</strong> Sadik Hasan</p>
+        <p><strong>Contact Email:</strong> sadikhasan@gmail.com</p>
+        <p><strong>Required Investment:</strong> $8,000</p>
+        <p><strong>Status:</strong> <span class="text-yellow-400 font-medium">Pending</span></p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <p><strong>Business Name:</strong> Eco-Friendly Packaging</p>
+        <p><strong>Owner Name:</strong> Rayhan</p>
+        <p><strong>Contact Email:</strong> rayhan@gmail.com</p>
+        <p><strong>Required Investment:</strong> $12,000</p>
+        <p><strong>Status:</strong> <span class="text-red-400 font-medium">Closed</span></p>
+      </div>
     </div>
 
     <div class="mt-6">

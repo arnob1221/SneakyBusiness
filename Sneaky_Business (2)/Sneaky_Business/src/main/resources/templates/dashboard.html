@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Investor Dashboard - Sneaky Business</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
@@ -50,22 +50,22 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div class="bg-white p-6 rounded-xl shadow text-center">
           <h2 class="text-xl font-semibold text-gray-700">Total Investment</h2>
-          <p class="text-2xl text-purple-600 font-bold mt-2">$0.00</p>
+          <p id="totalInvestment" class="text-2xl text-purple-600 font-bold mt-2">$0.00</p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow text-center">
           <h2 class="text-xl font-semibold text-gray-700">Returns</h2>
-          <p class="text-2xl text-green-500 font-bold mt-2">$0.00</p>
+          <p id="totalReturns" class="text-2xl text-green-500 font-bold mt-2">$0.00</p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow text-center">
           <h2 class="text-xl font-semibold text-gray-700">Active Projects</h2>
-          <p class="text-2xl text-blue-500 font-bold mt-2">0</p>
+          <p id="activeProjects" class="text-2xl text-blue-500 font-bold mt-2">0</p>
         </div>
       </div>
 
       <!-- Investment Table -->
-      <div class="bg-white p-6 rounded-xl shadow mb-10">
+      <div class="bg-white p-6 rounded-xl shadow mb-10 overflow-auto">
         <h2 class="text-xl font-bold mb-4 text-gray-800">Recent Investments</h2>
-        <table class="w-full text-left border-collapse">
+        <table id="investmentTable" class="w-full text-left border-collapse min-w-[600px]">
           <thead>
             <tr class="text-gray-600">
               <th class="py-2 border-b">Project</th>
@@ -75,24 +75,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="text-gray-700">
-              <td class="py-2 border-b">E-commerce App</td>
-              <td class="py-2 border-b">$10,000</td>
-              <td class="py-2 border-b text-green-500">Active</td>
-              <td class="py-2 border-b">Aug 1, 2025</td>
-            </tr>
-            <tr class="text-gray-700">
-              <td class="py-2 border-b">Logistics Platform</td>
-              <td class="py-2 border-b">$7,500</td>
-              <td class="py-2 border-b text-yellow-500">Pending</td>
-              <td class="py-2 border-b">Jul 24, 2025</td>
-            </tr>
-            <tr class="text-gray-700">
-              <td class="py-2 border-b">Food Delivery Startup</td>
-              <td class="py-2 border-b">$7,500</td>
-              <td class="py-2 border-b text-red-500">Closed</td>
-              <td class="py-2 border-b">Jul 18, 2025</td>
-            </tr>
+            <!-- Rows will be added dynamically -->
           </tbody>
         </table>
       </div>
@@ -100,14 +83,106 @@
       <!-- Add New Investment -->
       <div class="bg-white p-6 rounded-xl shadow">
         <h2 class="text-xl font-bold mb-4 text-gray-800">Add New Investment</h2>
-        <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input type="text" placeholder="Project Name" class="col-span-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-          <input type="number" placeholder="Amount ($)" class="col-span-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-          <button type="submit" class="col-span-1 bg-purple-600 text-white rounded px-4 py-2 hover:bg-purple-700 transition">Invest</button>
+        <form id="investmentForm" class="grid grid-cols-1 md:grid-cols-3 gap-4" onsubmit="return false;">
+          <input id="projectName" type="text" placeholder="Project Name" required class="col-span-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+          <input id="amount" type="number" placeholder="Amount ($)" required min="1" class="col-span-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+          <button id="addInvestmentBtn" type="submit" class="col-span-1 bg-purple-600 text-white rounded px-4 py-2 hover:bg-purple-700 transition">Invest</button>
         </form>
       </div>
     </main>
   </div>
+
+  <script>
+    // Start with empty investments array
+    let investments = [];
+
+    // Function to calculate summary values and update UI
+    function updateSummary() {
+      const totalInvestment = investments.reduce((sum, inv) => sum + inv.amount, 0);
+      const totalReturns = investments.reduce((sum, inv) => sum + inv.returns, 0);
+      const activeProjects = investments.filter(inv => inv.status.toLowerCase() === 'active').length;
+
+      document.getElementById('totalInvestment').textContent = `$${totalInvestment.toFixed(2)}`;
+      document.getElementById('totalReturns').textContent = `$${totalReturns.toFixed(2)}`;
+      document.getElementById('activeProjects').textContent = activeProjects;
+    }
+
+    // Function to render investments table rows
+    function renderInvestmentTable() {
+      const tbody = document.querySelector('#investmentTable tbody');
+      tbody.innerHTML = ''; // Clear existing rows
+
+      if(investments.length === 0){
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.setAttribute('colspan', '4');
+        td.className = 'text-center text-gray-500 py-4';
+        td.textContent = 'No investments found.';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+      }
+
+      investments.forEach(inv => {
+        const tr = document.createElement('tr');
+        tr.className = 'text-gray-700';
+
+        tr.innerHTML = `
+          <td class="py-2 border-b">${inv.project}</td>
+          <td class="py-2 border-b">$${inv.amount.toLocaleString()}</td>
+          <td class="py-2 border-b text-${getStatusColor(inv.status)}">${inv.status}</td>
+          <td class="py-2 border-b">${inv.date}</td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Helper to return Tailwind color class based on status
+    function getStatusColor(status) {
+      switch(status.toLowerCase()) {
+        case 'active': return 'green-500';
+        case 'pending': return 'yellow-500';
+        case 'closed': return 'red-500';
+        default: return 'gray-500';
+      }
+    }
+
+    // On form submit, add new investment and update UI
+    document.getElementById('investmentForm').addEventListener('submit', function() {
+      const project = document.getElementById('projectName').value.trim();
+      const amount = parseFloat(document.getElementById('amount').value);
+
+      if (!project || isNaN(amount) || amount <= 0) {
+        alert('Please enter valid project name and amount.');
+        return;
+      }
+
+      // Create new investment object
+      const newInvestment = {
+        project,
+        amount,
+        returns: amount * 0.1, // 10% return assumed for demo
+        status: 'Pending',     // Default status
+        date: new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' })
+      };
+
+      // Add to investments array
+      investments.push(newInvestment);
+
+      // Clear form inputs
+      document.getElementById('projectName').value = '';
+      document.getElementById('amount').value = '';
+
+      // Update UI
+      renderInvestmentTable();
+      updateSummary();
+    });
+
+    // Initial UI update
+    renderInvestmentTable();
+    updateSummary();
+  </script>
 
 </body>
 </html>

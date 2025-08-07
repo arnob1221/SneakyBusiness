@@ -2,25 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Profile - Sneaky Business</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 min-h-screen flex items-center justify-center text-white font-sans">
+<body class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 min-h-screen flex items-center justify-center text-white font-sans p-4">
 
-  <div class="bg-white/10 backdrop-blur-md p-10 rounded-xl shadow-2xl max-w-xl w-full">
-    <h2 class="text-3xl font-bold mb-4">👤 User Profile</h2>
+  <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl max-w-md w-full">
+    <h2 class="text-3xl font-bold mb-6 flex items-center space-x-3">
+      <span>👤</span>
+      <span>User Profile</span>
+    </h2>
 
-    <div class="space-y-4">
-      <p><strong>Name:</strong> John Doe</p>
-      <p><strong>Email:</strong> john@example.com</p>
-      <p><strong>Joined:</strong> August 2025</p>
+    <div id="profileInfo" class="space-y-4 text-lg">
+      <p><strong>Name:</strong> <span id="name">Loading...</span></p>
+      <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+      <p><strong>Joined:</strong> <span id="joined">Loading...</span></p>
     </div>
 
-    <div class="mt-6">
-      <a href="dashboard.html" class="text-purple-300 hover:underline">← Back to Dashboard</a>
+    <div class="mt-8">
+      <a href="dashboard.html" class="text-purple-300 hover:underline inline-block">← Back to Dashboard</a>
     </div>
   </div>
+
+  <script>
+    // Sample dynamic data load simulation
+    document.addEventListener("DOMContentLoaded", () => {
+      // In real app, fetch this data from API/localStorage
+      const userData = {
+        name: "Samiul Rahman",
+        email: "samiul@gmail.com",
+        joined: "August 2025"
+      };
+
+      document.getElementById('name').textContent = userData.name;
+      document.getElementById('email').textContent = userData.email;
+      document.getElementById('joined').textContent = userData.joined;
+    });
+  </script>
 
 </body>
 </html>
