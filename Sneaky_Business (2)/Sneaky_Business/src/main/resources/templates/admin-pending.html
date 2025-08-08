@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recent Investments - Sneaky Business</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="max-w-7xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Recent Investments</h1>
+
+    <!-- Table container -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <table class="min-w-full text-left hidden md:table">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="py-3 px-4">ID</th>
+            <th class="py-3 px-4">Investor Name</th>
+            <th class="py-3 px-4">Amount</th>
+            <th class="py-3 px-4">Date</th>
+            <th class="py-3 px-4">Status</th>
+            <th class="py-3 px-4 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="investmentTable">
+          <!-- Dynamic rows -->
+        </tbody>
+      </table>
+
+      <!-- Mobile Card View -->
+      <div id="investmentCards" class="grid grid-cols-1 gap-4 p-4 md:hidden">
+        <!-- Dynamic cards -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const investments = [
+      { id: 'INV001', name: 'John Doe', amount: '$5,000', date: '2025-08-05', status: 'Pending' },
+      { id: 'INV002', name: 'Jane Smith', amount: '$3,200', date: '2025-08-06', status: 'Pending' },
+      { id: 'INV003', name: 'Michael Lee', amount: '$7,500', date: '2025-08-07', status: 'Pending' }
+    ];
+
+    function updateStatus(index, newStatus) {
+      investments[index].status = newStatus;
+      renderTable();
+      renderCards();
+    }
+
+    function renderTable() {
+      const tableBody = document.getElementById('investmentTable');
+      tableBody.innerHTML = investments.map((inv, index) => `
+        <tr class="border-b hover:bg-gray-50">
+          <td class="py-3 px-4 font-medium">${inv.id}</td>
+          <td class="py-3 px-4">${inv.name}</td>
+          <td class="py-3 px-4">${inv.amount}</td>
+          <td class="py-3 px-4">${inv.date}</td>
+          <td class="py-3 px-4">
+            <span class="px-3 py-1 rounded-full text-sm font-semibold ${inv.status === 'Approved' ? 'bg-green-100 text-green-700' : inv.status === 'Rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">
+              ${inv.status}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-center space-x-2">
+            <button onclick="updateStatus(${index}, 'Approved')" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Approve</button>
+            <button onclick="updateStatus(${index}, 'Rejected')" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Reject</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderCards() {
+      const cardContainer = document.getElementById('investmentCards');
+      cardContainer.innerHTML = investments.map((inv, index) => `
+        <div class="bg-white p-4 rounded-lg shadow">
+          <p class="text-sm text-gray-500">ID: ${inv.id}</p>
+          <h2 class="text-lg font-semibold">${inv.name}</h2>
+          <p class="text-gray-700">Amount: ${inv.amount}</p>
+          <p class="text-gray-700">Date: ${inv.date}</p>
+          <p class="mt-1">
+            <span class="px-3 py-1 rounded-full text-sm font-semibold ${inv.status === 'Approved' ? 'bg-green-100 text-green-700' : inv.status === 'Rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">
+              ${inv.status}
+            </span>
+          </p>
+          <div class="mt-3 flex space-x-2">
+            <button onclick="updateStatus(${index}, 'Approved')" class="flex-1 bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Approve</button>
+            <button onclick="updateStatus(${index}, 'Rejected')" class="flex-1 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Reject</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderTable();
+    renderCards();
+  </script>
+</body>
+</html>

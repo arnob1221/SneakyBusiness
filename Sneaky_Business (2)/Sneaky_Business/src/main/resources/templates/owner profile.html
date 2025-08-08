@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile - Sneaky Business</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 min-h-screen flex items-center justify-center text-white font-sans p-4">
+
+  <div class="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-2xl max-w-md w-full text-center">
+    <!-- Profile picture and upload -->
+    <div class="relative w-24 h-24 mx-auto mb-6">
+      <img id="profilePic" src="https://i.pravatar.cc/80" alt="Profile Picture" class="w-24 h-24 rounded-full object-cover border-2 border-purple-500" />
+      <input id="profilePicInput" type="file" accept="image/*" class="hidden" />
+      <button id="changePicBtn" type="button" 
+        class="absolute bottom-0 right-0 bg-purple-600 hover:bg-purple-700 p-1 rounded-full text-sm" title="Change Profile Picture" style="user-select:none;">
+        ✎
+      </button>
+    </div>
+
+    <!-- <h2 class="text-3xl font-bold mb-8">User Profile</h2> -->
+
+    <form id="profileForm" class="space-y-6 text-center text-lg max-w-sm mx-auto" onsubmit="return false;">
+             <!-- User ID -->
+<div class="flex justify-center items-center space-x-4">
+  <label class="font-semibold text-xl whitespace-nowrap">User ID:</label>
+  <span id="userIdDisplay" class="font-normal text-lg">341-25-552</span>
+</div>
+      <!-- Name -->
+      <div class="flex justify-center items-center space-x-4">
+        <label class="font-semibold text-xl whitespace-nowrap">Name:</label>
+        <span id="nameDisplay" class="font-normal text-lg"></span>
+        <input id="nameInput" type="text" class="hidden text-black rounded px-3 py-1 w-48" required />
+      </div>
+
+      <!-- Email -->
+      <div class="flex justify-center items-center space-x-4">
+        <label class="font-semibold text-xl whitespace-nowrap">Email:</label>
+        <span id="emailDisplay" class="font-normal text-lg"></span>
+        <input id="emailInput" type="email" class="hidden text-black rounded px-3 py-1 w-48" required />
+      </div>
+
+     
+
+      <!-- Phone -->
+      <div class="flex justify-center items-center space-x-4">
+        <label class="font-semibold text-xl whitespace-nowrap">Phone Number:</label>
+        <span id="phoneDisplay" class="font-normal text-lg"></span>
+        <input id="phoneInput" type="tel" class="hidden text-black rounded px-3 py-1 w-48" pattern="[0-9+\-\s]{7,15}" placeholder="+880 1234 567890" required />
+      </div>
+       <!-- Joined (readonly) -->
+      <div class="flex justify-center items-center space-x-4">
+        <label class="font-semibold text-xl whitespace-nowrap">Joined:</label>
+        <span id="joinedDisplay" class="font-normal text-lg"></span>
+      </div>
+
+      <!-- Buttons -->
+      <div class="mt-6 flex justify-center space-x-4">
+        <button id="editBtn" type="button" class="bg-purple-600 px-6 py-2 rounded hover:bg-purple-700 transition">Edit Profile</button>
+        <button id="saveBtn" type="submit" class="bg-green-600 px-6 py-2 rounded hover:bg-green-700 transition hidden">Save</button>
+        <button id="cancelBtn" type="button" class="bg-red-600 px-6 py-2 rounded hover:bg-red-700 transition hidden">Cancel</button>
+      </div>
+    </form>
+
+    <div class="mt-8">
+      <a href="owner dashboard.html" class="text-purple-300 hover:underline inline-block">← Back to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const userData = {
+        name: "Samiul Rahman",
+        email: "samiul@gmail.com",
+        phone: "+880 1234 567890",
+        joined: "August 2025",
+        profilePic: "https://i.pravatar.cc/80"
+      };
+
+      const nameDisplay = document.getElementById('nameDisplay');
+      const emailDisplay = document.getElementById('emailDisplay');
+      const joinedDisplay = document.getElementById('joinedDisplay');
+      const phoneDisplay = document.getElementById('phoneDisplay');
+      const profilePic = document.getElementById('profilePic');
+
+      const nameInput = document.getElementById('nameInput');
+      const emailInput = document.getElementById('emailInput');
+      const phoneInput = document.getElementById('phoneInput');
+
+      const editBtn = document.getElementById('editBtn');
+      const saveBtn = document.getElementById('saveBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+
+      const changePicBtn = document.getElementById('changePicBtn');
+      const profilePicInput = document.getElementById('profilePicInput');
+
+      function updateDisplay() {
+        nameDisplay.textContent = userData.name;
+        emailDisplay.textContent = userData.email;
+        joinedDisplay.textContent = userData.joined;
+        phoneDisplay.textContent = userData.phone;
+        profilePic.src = userData.profilePic;
+      }
+
+      function updateInputs() {
+        nameInput.value = userData.name;
+        emailInput.value = userData.email;
+        phoneInput.value = userData.phone;
+      }
+
+      function toggleEdit(isEditing) {
+        [nameDisplay, emailDisplay, phoneDisplay].forEach(el => el.style.display = isEditing ? 'none' : 'inline');
+        [nameInput, emailInput, phoneInput].forEach(el => el.classList.toggle('hidden', !isEditing));
+
+        editBtn.classList.toggle('hidden', isEditing);
+        saveBtn.classList.toggle('hidden', !isEditing);
+        cancelBtn.classList.toggle('hidden', !isEditing);
+        changePicBtn.style.display = isEditing ? 'block' : 'none';
+      }
+
+      function enableEdit() {
+        updateInputs();
+        toggleEdit(true);
+      }
+
+      function disableEdit() {
+        toggleEdit(false);
+      }
+
+      function saveChanges() {
+        if (!nameInput.checkValidity() || !emailInput.checkValidity() || !phoneInput.checkValidity()) {
+          alert("Please fill in all fields correctly.");
+          return false;
+        }
+
+        userData.name = nameInput.value.trim();
+        userData.email = emailInput.value.trim();
+        userData.phone = phoneInput.value.trim();
+
+        updateDisplay();
+        disableEdit();
+      }
+
+      function cancelChanges() {
+        disableEdit();
+      }
+
+      // Handle profile pic change
+      changePicBtn.addEventListener('click', () => {
+        profilePicInput.click();
+      });
+
+      profilePicInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            userData.profilePic = reader.result;
+            profilePic.src = reader.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      updateDisplay();
+
+      editBtn.addEventListener('click', enableEdit);
+      saveBtn.addEventListener('click', saveChanges);
+      cancelBtn.addEventListener('click', cancelChanges);
+    });
+  </script>
+
+</body>
+</html>
